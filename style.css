@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+header {
+  background-color: #28a745;
+  color: white;
+  padding: 1em;
+}
+
+main {
+  margin: 2em auto;
+  width: 80%;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+button {
+  padding: 1em;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+form {
+  margin: 2em 0;
+}
+
+select {
+  padding: 0.5em;
+}
