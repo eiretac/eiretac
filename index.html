@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Republic of Ireland</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>General Election</h1>
+  </header>
+
+  <main>
+    <section id="auth-section">
+      <h2>Authenticate your Roblox account to vote</h2>
+      <button id="login-button">Login with Roblox</button>
+    </section>
+
+    <section id="voting-section" style="display: none;">
+      <h2>Cast Your Vote</h2>
+      <form id="voting-form">
+        <label for="candidate-select">Choose your candidate:</label>
+        <select id="candidate-select">
+          <option value="candidate1">Candidate 1</option>
+          <option value="candidate2">Candidate 2</option>
+          <option value="candidate3">Candidate 3</option>
+        </select>
+        <button type="submit">Submit Vote</button>
+      </form>
+    </section>
+
+    <section id="status-section" style="display: none;">
+      <p id="status-message"></p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('login-button').addEventListener('click', function() {
+      // Trigger Roblox OAuth login process
+      window.location.href = '/auth/roblox';
+    });
+
+    document.getElementById('voting-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const candidate = document.getElementById('candidate-select').value;
+
+      const response = await fetch('/submit-vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ candidate })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        document.getElementById('voting-section').style.display = 'none';
+        document.getElementById('status-section').style.display = 'block';
+        document.getElementById('status-message').textContent = 'Thank you for voting!';
+      } else {
+        document.getElementById('status-message').textContent = 'An error occurred while submitting your vote. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
